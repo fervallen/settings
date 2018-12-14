@@ -10,6 +10,9 @@ alias stage='ssh fervallen@stage'
 alias static='ssh fervallen@static'
 alias vds='ssh mtk@vds'
 
+alias gwatch='gulp watch'
+alias gbuild='gulp build'
+
 nb () {
     git checkout master
     git pull
@@ -18,6 +21,17 @@ nb () {
 
 out () {
     git checkout "HC-$1"
+}
+
+api-cache () {
+    composer install
+    clear-phpdi
+    clear-doctrine
+}
+
+cout () {
+    out $1
+    api-cache
 }
 
 gout () {
@@ -65,3 +79,7 @@ greset () {
     gulp build
 }
 
+creset () {
+    reset
+    api-cache
+}
