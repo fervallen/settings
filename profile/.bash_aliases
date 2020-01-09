@@ -1,42 +1,23 @@
+
 alias pull='git pull'
 alias push='git push'
 alias pop='git stash pop'
 alias stash='git stash'
 alias master='git checkout master'
-alias clear-branches='git branch | grep -v "master\|*" | xargs git branch -D'
+alias develop='git checkout develop'
+alias clear-branches='git branch | grep -v "master\|develop\|*" | xargs git branch -D'
 
-alias prod='ssh fervallen@prod'
-alias stage='ssh fervallen@stage'
-alias static='ssh fervallen@static'
 alias vds='ssh mtk@vds'
-
-alias gwatch='gulp watch'
-alias gbuild='gulp build'
+alias dev='ssh pavel@dev'
 
 nb () {
     git checkout master
     git pull
-    git checkout -b "HC-$1"
+    git checkout -b "$1"
 }
 
 out () {
-    git checkout "HC-$1"
-}
-
-api-cache () {
-    composer install
-    clear-phpdi
-    clear-doctrine
-}
-
-cout () {
-    out $1
-    api-cache
-}
-
-gout () {
-    git checkout "HC-$1"
-    gulp build
+    git checkout "$1"
 }
 
 patch () {
@@ -72,14 +53,4 @@ mermas () {
 reset () {
     git checkout master
     git pull
-}
-
-greset () {
-    reset
-    gulp build
-}
-
-creset () {
-    reset
-    api-cache
 }
