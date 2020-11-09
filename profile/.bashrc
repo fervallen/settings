@@ -16,11 +16,11 @@ alias dev='ssh pavel@dev'
 nb () {
     git checkout master
     git pull
-    git checkout -b "$1"
+    git checkout -b "feature/EN-$1"
 }
 
 out () {
-    git checkout "$1"
+    git checkout "feature/EN-$1"
 }
 
 patch () {
@@ -53,11 +53,11 @@ mermas () {
     git merge master
 }
 
-reset () {
-    git checkout master
+merdev () {
+    git add .
+    CURRENT=`git rev-parse --symbolic-full-name --abbrev-ref HEAD`
+    git checkout develop
     git pull
-}
-
-selenium () {
-	java -jar "C:\Program Files\selenium\selenium-server.jar"
+    git checkout $CURRENT
+    git merge develop
 }
